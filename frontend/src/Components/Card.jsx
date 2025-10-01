@@ -32,7 +32,7 @@ const Card = ({ _id, name, prompt, photo, onDelete, onView }) => {
 
     setIsDeleting(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/post/${_id}`, {
+      const response = await fetch(`https://ai-image-genrater-dfy5.onrender.com/api/v1/post/${_id}`, {
         method: 'DELETE',
       });
 
