@@ -1,27 +1,12 @@
+
 import React from 'react';
-import { BounceLoader } from 'react-spinners';
 
-// This is a style object for the loader, which is an alternative to Tailwind CSS classes
-const override = {
-  display: 'block',
-  margin: '0 auto',
-  borderColor: 'red',
-};
-
-const AnotherLoader = ({ isLoading }) => {
+const Loader = () => {
   return (
-    <div className="sweet-loading">
-      {/* The 'loading' prop controls the visibility of the loader. */}
-      <BounceLoader
-        color="#6469ff"
-        loading={isLoading}
-        cssOverride={override}
-        size={150}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+    <div className="flex justify-center items-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6469ff]"></div>
     </div>
   );
 };
 
-export default AnotherLoader;
+export default Loader;
