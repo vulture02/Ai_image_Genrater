@@ -205,7 +205,7 @@ ai-image-generator/
 | Variable | Description |
 |----------|-------------|
 | `MONGODB_URL` | MongoDB connection string |
-| `OPENAI_API_KEY` | OpenAI API key for DALL-E |
+| `OPENAI_API_KEY` | OpenAI API key of GEMINI-API  |
 | `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
 | `CLOUDINARY_API_KEY` | Cloudinary API key |
 | `CLOUDINARY_API_SECRET` | Cloudinary API secret |
