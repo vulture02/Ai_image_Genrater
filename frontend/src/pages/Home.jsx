@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../constant/AuthContext';
@@ -12,7 +11,15 @@ import { Loader } from '../Components';
 
 const RenderCards = ({ data, title, onDelete, onView }) => {
   if (data?.length > 0) {
-    return data.map((post) => <Card key={post._id} {...post} onDelete={onDelete} onView={onView} />);
+    return data.map((post, index) => {
+      // Create pattern: big, small, small, big, small, small...
+      const sizeClass = index % 3 === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1';
+      return (
+        <div key={post._id} className={sizeClass}>
+          <Card {...post} onDelete={onDelete} onView={onView} />
+        </div>
+      );
+    });
   }
 
   return (
@@ -127,7 +134,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Your Recent Creations - Main Gallery */}
+        {/* Your Recent Creations - Masonry Gallery */}
         <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
           <h2 className="font-bold text-[#222328] text-[24px] mb-6">Your Recent Creations</h2>
           
@@ -153,7 +160,7 @@ const Home = () => {
                   Showing results for <span className="text-[#222328]">{searchText}</span>
                 </h2>
               )}
-              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] gap-4">
                 {searchText ? (
                   <RenderCards
                     data={searchedResults}
@@ -254,7 +261,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Community Posts Gallery for Guests */}
+      {/* Community Posts Gallery for Guests - Masonry Layout */}
       <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
         <h2 className="font-bold text-[#222328] text-[28px] mb-6 text-center">
           Community Gallery
@@ -268,7 +275,7 @@ const Home = () => {
             <Loader/>
           </div>
         ) : allPosts.length > 0 ? (
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] gap-4">
             <RenderCards data={allPosts} onDelete={handleDelete} onView={handleViewImage} />
           </div>
         ) : (

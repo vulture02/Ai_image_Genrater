@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Download, Trash2, Eye } from 'lucide-react';
 import { useAuth } from '../constant/AuthContext';
@@ -51,49 +50,54 @@ const Card = ({ _id, name, prompt, photo, onDelete, onView }) => {
   };
 
   return (
-    <div className="rounded-xl group relative shadow-card hover:shadow-cardhover card overflow-hidden">
-      <img
-        className="w-full h-auto object-cover rounded-xl cursor-pointer"
-        src={photo}
-        alt={prompt}
-        onClick={() => onView({ _id, name, prompt, photo })}
-      />
-      <div className="group-hover:flex flex-col max-h-[94.5%] hidden absolute bottom-0 left-0 right-0 bg-[#10131f] m-2 p-4 rounded-md">
-        <p className="text-white text-sm overflow-y-auto prompt mb-2">{prompt}</p>
-        <div className="mt-2">
+    <div className="rounded-xl group relative shadow-card hover:shadow-cardhover overflow-hidden h-full">
+      {/* Image Container that fills parent */}
+      <div className="relative w-full h-full bg-gray-100">
+        <img
+          className="w-full h-full object-cover cursor-pointer"
+          src={photo}
+          alt={prompt}
+          onClick={() => onView({ _id, name, prompt, photo })}
+        />
+        
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#10131f] via-[#10131f]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+          <p className="text-white text-sm line-clamp-2 mb-3">{prompt}</p>
+          
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 flex-1 min-w-0">
-              <div className="w-7 h-7 rounded-full object-cover bg-green-700 flex justify-center items-center text-white text-xs font-bold flex-shrink-0">
+              <div className="w-7 h-7 rounded-full bg-green-700 flex justify-center items-center text-white text-xs font-bold flex-shrink-0">
                 {name[0]}
               </div>
               <p className="text-white text-sm truncate">{name}</p>
             </div>
+            
             <div className="flex gap-2 flex-shrink-0">
               <button
                 type="button"
                 onClick={() => onView({ _id, name, prompt, photo })}
-                className="outline-none bg-transparent border-none p-1 hover:bg-white/10 rounded-full transition-colors"
+                className="outline-none bg-white/10 hover:bg-white/20 border-none p-2 rounded-full transition-colors"
                 title="View image"
               >
-                <Eye className="w-5 h-5 text-white" />
+                <Eye className="w-4 h-4 text-white" />
               </button>
               <button
                 type="button"
                 onClick={handleDownload}
-                className="outline-none bg-transparent border-none p-1 hover:bg-white/10 rounded-full transition-colors"
+                className="outline-none bg-white/10 hover:bg-white/20 border-none p-2 rounded-full transition-colors"
                 title="Download image"
               >
-                <Download className="w-5 h-5 text-white" />
+                <Download className="w-4 h-4 text-white" />
               </button>
               {currentUser && currentUser.displayName === name && (
                 <button
                   type="button"
                   onClick={handleDelete}
                   disabled={isDeleting}
-                  className="outline-none bg-transparent border-none p-1 hover:bg-red-500/20 rounded-full transition-colors disabled:opacity-50"
+                  className="outline-none bg-white/10 hover:bg-red-500/30 border-none p-2 rounded-full transition-colors disabled:opacity-50"
                   title="Delete image"
                 >
-                  <Trash2 className="w-5 h-5 text-red-500" />
+                  <Trash2 className="w-4 h-4 text-red-500" />
                 </button>
               )}
             </div>
